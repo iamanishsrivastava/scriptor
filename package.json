@@ -8,7 +8,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate:structure": "tree -I 'node_modules|.git|.next|dist' -L 3 -a > structure.md",
+    "test": "jest --watch",
+    "build:prod": "next build && next export"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",

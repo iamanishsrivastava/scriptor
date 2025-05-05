@@ -197,7 +197,7 @@ This project is **open-sourced with restrictions**.
 - You may not use the code in any way that could be considered **derivative** or **commercial** without explicit permission from the Scriptor Team.  
   Read more at [LICENSE.md](./LICENSE.md).
 
-## Contributors
+## The Scriptor Team
 
-- [GitHub Profile](https://github.com/iamanishsrivastava)
-- [GitHub Profile](https://github.com/devwithgroot)
+- [Anish Srivastava](https://github.com/iamanishsrivastava)
+- [Sandeep](https://github.com/devwithgroot)

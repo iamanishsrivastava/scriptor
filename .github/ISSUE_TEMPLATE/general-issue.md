@@ -1,5 +1,5 @@
 ---
-name: General issue template
+name: General issue
 about: For anything else related to the project—whether it’s a bug, question, or general
   feedback.
 title: GEN

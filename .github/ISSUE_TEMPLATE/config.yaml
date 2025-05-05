@@ -1,0 +1,14 @@
+# .github/ISSUE_TEMPLATE/config.yml
+templates:
+  - name: Bug Report
+    about: "Create a bug report to help us improve."
+    labels: bug
+    file: bug_report.md
+  - name: Feature Request
+    about: "Suggest a new feature to improve the project."
+    labels: enhancement
+    file: feature_request.md
+  - name: General Issue
+    about: "Use this template for general inquiries or questions."
+    labels: question
+    file: general_issue.md

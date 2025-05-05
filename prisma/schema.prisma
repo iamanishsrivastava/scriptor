@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/lib/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+// current version using uuid() later to be tested against cuid (or nuid)
+model User {
+  id        String   @id @default(uuid())
+  name      String?
+  email     String?  @unique
+  password  String?
+  joinedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projects Project[]
+  scripts  Script[]
+  voices   Voice[]
+}
+
+model Project {
+  id         String   @id @default(uuid())
+  username   String   @unique
+  email      String   @unique
+  password   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  deletedAt DateTime?
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
+
+  scripts Script[]
+}
+
+model Script {
+  id String @id @default(uuid())
+  title String
+  type String
+  text String
+  metadata String
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+  
+  userId String
+  projectId String
+  voicesId String? // Optional, because not every script might have a voice
+  user User @relation(fields: [userId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  voices Voice? @relation(fields: [voicesId], references: [id])
+  // voices     Voice[]  @relation("ScriptVoices") - many-to-many relation
+}
+
+model Voice {
+  id String @id @default(uuid())
+  hash String
+  metadata String
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+  userId String
+
+  user User @relation(fields: [userId], references: [id])
+  script Script[]
+
+  // script Script[] @relation("ScriptVoices") // many-to-many relation
+}

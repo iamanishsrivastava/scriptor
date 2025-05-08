@@ -1,4 +1,4 @@
-![License: Custom](./LICENSE.md)  
+[![License: Custom](https://img.shields.io/badge/license-Custom-blue.svg)](./LICENSE.md)
 🔒 This is a personal team project — open for learning and contributions, but **all rights are reserved**. See [LICENSE](./LICENSE) for details.
 
 # Scriptor - Script-to-Voice Transcriptor

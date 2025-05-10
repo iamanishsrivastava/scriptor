@@ -11,7 +11,15 @@
     "lint": "next lint",
     "generate:structure": "tree -I 'node_modules|.git|.next|dist' -L 3 -a > structure.md",
     "test": "jest --watch",
-    "build:prod": "next build && next export"
+    "build:prod": "next build && next export",
+    "prisma": "prisma",
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev --name",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:generate": "prisma generate",
+    "db:seed": "prisma db seed",
+    "db:reset": "prisma migrate reset --force"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",

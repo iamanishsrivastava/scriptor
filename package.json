@@ -13,13 +13,13 @@
     "test": "jest --watch",
     "build:prod": "next build && next export",
     "prisma": "prisma",
-    "studio": "prisma studio",
     "migrate": "prisma migrate dev --name",
-    "db:push": "prisma db push",
-    "db:studio": "prisma studio",
-    "db:generate": "prisma generate",
-    "db:seed": "prisma db seed",
-    "db:reset": "prisma migrate reset --force"
+    "status": "prisma migrate status",
+    "push": "prisma db push",
+    "generate": "prisma generate",
+    "studio": "prisma studio",
+    "seed": "prisma db seed",
+    "reset": "prisma migrate reset --force"
   },
   "dependencies": {
     "@prisma/client": "^6.7.0",

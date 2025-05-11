@@ -28,17 +28,31 @@ model User {
   voices   Voice[]
 }
 
-model Project {
+model AnonymousUser {
+  // This model is used to store users who are not logged in
   id        String    @id @default(uuid())
-  username  String    @unique
-  email     String    @unique
-  password  String
-  createdAt DateTime  @default(now())
+  joinedAt  DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
-  userId    String
+  expiresAt DateTime?
 
-  user User @relation(fields: [userId], references: [id])
+  projects Project[]
+  scripts  Script[]
+  voices   Voice[]
+}
+
+model Project {
+  id              String    @id @default(uuid())
+  username        String    @unique
+  email           String    @unique
+  password        String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+  userId          String
+  anonymousUserId String?
+
+  user          User           @relation(fields: [userId], references: [id])
+  anonymousUser AnonymousUser? @relation(fields: [anonymousUserId], references: [id]) // Foreign key relation
 
   scripts Script[]
 }
@@ -52,25 +66,30 @@ model Script {
   createdAt DateTime  @default(now())
   deletedAt DateTime?
 
-  userId    String
-  projectId String
-  voicesId  String? // Optional, because not every script might have a voice
-  user      User    @relation(fields: [userId], references: [id])
-  project   Project @relation(fields: [projectId], references: [id])
-  voices    Voice?  @relation(fields: [voicesId], references: [id])
+  userId          String
+  projectId       String
+  voicesId        String? // Optional, because not every script might have a voice
+  anonymousUserId String? // Optional reference to AnonymousUser
+
+  user          User           @relation(fields: [userId], references: [id])
+  project       Project        @relation(fields: [projectId], references: [id])
+  voices        Voice?         @relation(fields: [voicesId], references: [id])
   // voices     Voice[]  @relation("ScriptVoices") - many-to-many relation
+  anonymousUser AnonymousUser? @relation(fields: [anonymousUserId], references: [id])
 }
 
 model Voice {
-  id        String    @id @default(uuid())
-  hash      String
-  metadata  String
-  createdAt DateTime  @default(now())
-  deletedAt DateTime?
-  userId    String
+  id              String    @id @default(uuid())
+  hash            String
+  metadata        String
+  createdAt       DateTime  @default(now())
+  deletedAt       DateTime?
+  userId          String
+  anonymousUserId String? // Optional reference to AnonymousUser
 
-  user   User     @relation(fields: [userId], references: [id])
+  user          User           @relation(fields: [userId], references: [id])
+  anonymousUser AnonymousUser? @relation(fields: [anonymousUserId], references: [id])
+
   script Script[]
-
   // script Script[] @relation("ScriptVoices") // many-to-many relation
 }

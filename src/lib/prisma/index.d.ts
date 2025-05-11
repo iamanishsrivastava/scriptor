@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model AnonymousUser
+ * 
+ */
+export type AnonymousUser = $Result.DefaultSelection<Prisma.$AnonymousUserPayload>
+/**
  * Model Project
  * 
  */
@@ -168,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.anonymousUser`: Exposes CRUD operations for the **AnonymousUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AnonymousUsers
+    * const anonymousUsers = await prisma.anonymousUser.findMany()
+    * ```
+    */
+  get anonymousUser(): Prisma.AnonymousUserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.project`: Exposes CRUD operations for the **Project** model.
@@ -639,6 +654,7 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    AnonymousUser: 'AnonymousUser',
     Project: 'Project',
     Script: 'Script',
     Voice: 'Voice'
@@ -660,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "project" | "script" | "voice"
+      modelProps: "user" | "anonymousUser" | "project" | "script" | "voice"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -735,6 +751,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      AnonymousUser: {
+        payload: Prisma.$AnonymousUserPayload<ExtArgs>
+        fields: Prisma.AnonymousUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AnonymousUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AnonymousUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          findFirst: {
+            args: Prisma.AnonymousUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AnonymousUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          findMany: {
+            args: Prisma.AnonymousUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>[]
+          }
+          create: {
+            args: Prisma.AnonymousUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          createMany: {
+            args: Prisma.AnonymousUserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AnonymousUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>[]
+          }
+          delete: {
+            args: Prisma.AnonymousUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          update: {
+            args: Prisma.AnonymousUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.AnonymousUserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AnonymousUserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AnonymousUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>[]
+          }
+          upsert: {
+            args: Prisma.AnonymousUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AnonymousUserPayload>
+          }
+          aggregate: {
+            args: Prisma.AnonymousUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAnonymousUser>
+          }
+          groupBy: {
+            args: Prisma.AnonymousUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AnonymousUserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AnonymousUserCountArgs<ExtArgs>
+            result: $Utils.Optional<AnonymousUserCountAggregateOutputType> | number
           }
         }
       }
@@ -1045,6 +1135,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    anonymousUser?: AnonymousUserOmit
     project?: ProjectOmit
     script?: ScriptOmit
     voice?: VoiceOmit
@@ -1182,6 +1273,55 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountVoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VoiceWhereInput
+  }
+
+
+  /**
+   * Count Type AnonymousUserCountOutputType
+   */
+
+  export type AnonymousUserCountOutputType = {
+    projects: number
+    scripts: number
+    voices: number
+  }
+
+  export type AnonymousUserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projects?: boolean | AnonymousUserCountOutputTypeCountProjectsArgs
+    scripts?: boolean | AnonymousUserCountOutputTypeCountScriptsArgs
+    voices?: boolean | AnonymousUserCountOutputTypeCountVoicesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AnonymousUserCountOutputType without action
+   */
+  export type AnonymousUserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUserCountOutputType
+     */
+    select?: AnonymousUserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AnonymousUserCountOutputType without action
+   */
+  export type AnonymousUserCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectWhereInput
+  }
+
+  /**
+   * AnonymousUserCountOutputType without action
+   */
+  export type AnonymousUserCountOutputTypeCountScriptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ScriptWhereInput
+  }
+
+  /**
+   * AnonymousUserCountOutputType without action
+   */
+  export type AnonymousUserCountOutputTypeCountVoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VoiceWhereInput
   }
 
@@ -2392,6 +2532,1119 @@ export namespace Prisma {
 
 
   /**
+   * Model AnonymousUser
+   */
+
+  export type AggregateAnonymousUser = {
+    _count: AnonymousUserCountAggregateOutputType | null
+    _min: AnonymousUserMinAggregateOutputType | null
+    _max: AnonymousUserMaxAggregateOutputType | null
+  }
+
+  export type AnonymousUserMinAggregateOutputType = {
+    id: string | null
+    joinedAt: Date | null
+    updatedAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type AnonymousUserMaxAggregateOutputType = {
+    id: string | null
+    joinedAt: Date | null
+    updatedAt: Date | null
+    expiresAt: Date | null
+  }
+
+  export type AnonymousUserCountAggregateOutputType = {
+    id: number
+    joinedAt: number
+    updatedAt: number
+    expiresAt: number
+    _all: number
+  }
+
+
+  export type AnonymousUserMinAggregateInputType = {
+    id?: true
+    joinedAt?: true
+    updatedAt?: true
+    expiresAt?: true
+  }
+
+  export type AnonymousUserMaxAggregateInputType = {
+    id?: true
+    joinedAt?: true
+    updatedAt?: true
+    expiresAt?: true
+  }
+
+  export type AnonymousUserCountAggregateInputType = {
+    id?: true
+    joinedAt?: true
+    updatedAt?: true
+    expiresAt?: true
+    _all?: true
+  }
+
+  export type AnonymousUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnonymousUser to aggregate.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AnonymousUsers
+    **/
+    _count?: true | AnonymousUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AnonymousUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AnonymousUserMaxAggregateInputType
+  }
+
+  export type GetAnonymousUserAggregateType<T extends AnonymousUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateAnonymousUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAnonymousUser[P]>
+      : GetScalarType<T[P], AggregateAnonymousUser[P]>
+  }
+
+
+
+
+  export type AnonymousUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AnonymousUserWhereInput
+    orderBy?: AnonymousUserOrderByWithAggregationInput | AnonymousUserOrderByWithAggregationInput[]
+    by: AnonymousUserScalarFieldEnum[] | AnonymousUserScalarFieldEnum
+    having?: AnonymousUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AnonymousUserCountAggregateInputType | true
+    _min?: AnonymousUserMinAggregateInputType
+    _max?: AnonymousUserMaxAggregateInputType
+  }
+
+  export type AnonymousUserGroupByOutputType = {
+    id: string
+    joinedAt: Date
+    updatedAt: Date
+    expiresAt: Date | null
+    _count: AnonymousUserCountAggregateOutputType | null
+    _min: AnonymousUserMinAggregateOutputType | null
+    _max: AnonymousUserMaxAggregateOutputType | null
+  }
+
+  type GetAnonymousUserGroupByPayload<T extends AnonymousUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AnonymousUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AnonymousUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AnonymousUserGroupByOutputType[P]>
+            : GetScalarType<T[P], AnonymousUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AnonymousUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    joinedAt?: boolean
+    updatedAt?: boolean
+    expiresAt?: boolean
+    projects?: boolean | AnonymousUser$projectsArgs<ExtArgs>
+    scripts?: boolean | AnonymousUser$scriptsArgs<ExtArgs>
+    voices?: boolean | AnonymousUser$voicesArgs<ExtArgs>
+    _count?: boolean | AnonymousUserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["anonymousUser"]>
+
+  export type AnonymousUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    joinedAt?: boolean
+    updatedAt?: boolean
+    expiresAt?: boolean
+  }, ExtArgs["result"]["anonymousUser"]>
+
+  export type AnonymousUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    joinedAt?: boolean
+    updatedAt?: boolean
+    expiresAt?: boolean
+  }, ExtArgs["result"]["anonymousUser"]>
+
+  export type AnonymousUserSelectScalar = {
+    id?: boolean
+    joinedAt?: boolean
+    updatedAt?: boolean
+    expiresAt?: boolean
+  }
+
+  export type AnonymousUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "joinedAt" | "updatedAt" | "expiresAt", ExtArgs["result"]["anonymousUser"]>
+  export type AnonymousUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projects?: boolean | AnonymousUser$projectsArgs<ExtArgs>
+    scripts?: boolean | AnonymousUser$scriptsArgs<ExtArgs>
+    voices?: boolean | AnonymousUser$voicesArgs<ExtArgs>
+    _count?: boolean | AnonymousUserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AnonymousUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AnonymousUserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AnonymousUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AnonymousUser"
+    objects: {
+      projects: Prisma.$ProjectPayload<ExtArgs>[]
+      scripts: Prisma.$ScriptPayload<ExtArgs>[]
+      voices: Prisma.$VoicePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      joinedAt: Date
+      updatedAt: Date
+      expiresAt: Date | null
+    }, ExtArgs["result"]["anonymousUser"]>
+    composites: {}
+  }
+
+  type AnonymousUserGetPayload<S extends boolean | null | undefined | AnonymousUserDefaultArgs> = $Result.GetResult<Prisma.$AnonymousUserPayload, S>
+
+  type AnonymousUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AnonymousUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AnonymousUserCountAggregateInputType | true
+    }
+
+  export interface AnonymousUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AnonymousUser'], meta: { name: 'AnonymousUser' } }
+    /**
+     * Find zero or one AnonymousUser that matches the filter.
+     * @param {AnonymousUserFindUniqueArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AnonymousUserFindUniqueArgs>(args: SelectSubset<T, AnonymousUserFindUniqueArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AnonymousUser that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AnonymousUserFindUniqueOrThrowArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AnonymousUserFindUniqueOrThrowArgs>(args: SelectSubset<T, AnonymousUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnonymousUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserFindFirstArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AnonymousUserFindFirstArgs>(args?: SelectSubset<T, AnonymousUserFindFirstArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AnonymousUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserFindFirstOrThrowArgs} args - Arguments to find a AnonymousUser
+     * @example
+     * // Get one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AnonymousUserFindFirstOrThrowArgs>(args?: SelectSubset<T, AnonymousUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AnonymousUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AnonymousUsers
+     * const anonymousUsers = await prisma.anonymousUser.findMany()
+     * 
+     * // Get first 10 AnonymousUsers
+     * const anonymousUsers = await prisma.anonymousUser.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const anonymousUserWithIdOnly = await prisma.anonymousUser.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AnonymousUserFindManyArgs>(args?: SelectSubset<T, AnonymousUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AnonymousUser.
+     * @param {AnonymousUserCreateArgs} args - Arguments to create a AnonymousUser.
+     * @example
+     * // Create one AnonymousUser
+     * const AnonymousUser = await prisma.anonymousUser.create({
+     *   data: {
+     *     // ... data to create a AnonymousUser
+     *   }
+     * })
+     * 
+     */
+    create<T extends AnonymousUserCreateArgs>(args: SelectSubset<T, AnonymousUserCreateArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AnonymousUsers.
+     * @param {AnonymousUserCreateManyArgs} args - Arguments to create many AnonymousUsers.
+     * @example
+     * // Create many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AnonymousUserCreateManyArgs>(args?: SelectSubset<T, AnonymousUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AnonymousUsers and returns the data saved in the database.
+     * @param {AnonymousUserCreateManyAndReturnArgs} args - Arguments to create many AnonymousUsers.
+     * @example
+     * // Create many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AnonymousUsers and only return the `id`
+     * const anonymousUserWithIdOnly = await prisma.anonymousUser.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AnonymousUserCreateManyAndReturnArgs>(args?: SelectSubset<T, AnonymousUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AnonymousUser.
+     * @param {AnonymousUserDeleteArgs} args - Arguments to delete one AnonymousUser.
+     * @example
+     * // Delete one AnonymousUser
+     * const AnonymousUser = await prisma.anonymousUser.delete({
+     *   where: {
+     *     // ... filter to delete one AnonymousUser
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AnonymousUserDeleteArgs>(args: SelectSubset<T, AnonymousUserDeleteArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AnonymousUser.
+     * @param {AnonymousUserUpdateArgs} args - Arguments to update one AnonymousUser.
+     * @example
+     * // Update one AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AnonymousUserUpdateArgs>(args: SelectSubset<T, AnonymousUserUpdateArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AnonymousUsers.
+     * @param {AnonymousUserDeleteManyArgs} args - Arguments to filter AnonymousUsers to delete.
+     * @example
+     * // Delete a few AnonymousUsers
+     * const { count } = await prisma.anonymousUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AnonymousUserDeleteManyArgs>(args?: SelectSubset<T, AnonymousUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnonymousUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AnonymousUserUpdateManyArgs>(args: SelectSubset<T, AnonymousUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AnonymousUsers and returns the data updated in the database.
+     * @param {AnonymousUserUpdateManyAndReturnArgs} args - Arguments to update many AnonymousUsers.
+     * @example
+     * // Update many AnonymousUsers
+     * const anonymousUser = await prisma.anonymousUser.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AnonymousUsers and only return the `id`
+     * const anonymousUserWithIdOnly = await prisma.anonymousUser.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AnonymousUserUpdateManyAndReturnArgs>(args: SelectSubset<T, AnonymousUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AnonymousUser.
+     * @param {AnonymousUserUpsertArgs} args - Arguments to update or create a AnonymousUser.
+     * @example
+     * // Update or create a AnonymousUser
+     * const anonymousUser = await prisma.anonymousUser.upsert({
+     *   create: {
+     *     // ... data to create a AnonymousUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AnonymousUser we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AnonymousUserUpsertArgs>(args: SelectSubset<T, AnonymousUserUpsertArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AnonymousUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserCountArgs} args - Arguments to filter AnonymousUsers to count.
+     * @example
+     * // Count the number of AnonymousUsers
+     * const count = await prisma.anonymousUser.count({
+     *   where: {
+     *     // ... the filter for the AnonymousUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends AnonymousUserCountArgs>(
+      args?: Subset<T, AnonymousUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AnonymousUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AnonymousUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AnonymousUserAggregateArgs>(args: Subset<T, AnonymousUserAggregateArgs>): Prisma.PrismaPromise<GetAnonymousUserAggregateType<T>>
+
+    /**
+     * Group by AnonymousUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AnonymousUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AnonymousUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AnonymousUserGroupByArgs['orderBy'] }
+        : { orderBy?: AnonymousUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AnonymousUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAnonymousUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AnonymousUser model
+   */
+  readonly fields: AnonymousUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AnonymousUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AnonymousUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    projects<T extends AnonymousUser$projectsArgs<ExtArgs> = {}>(args?: Subset<T, AnonymousUser$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    scripts<T extends AnonymousUser$scriptsArgs<ExtArgs> = {}>(args?: Subset<T, AnonymousUser$scriptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScriptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    voices<T extends AnonymousUser$voicesArgs<ExtArgs> = {}>(args?: Subset<T, AnonymousUser$voicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AnonymousUser model
+   */
+  interface AnonymousUserFieldRefs {
+    readonly id: FieldRef<"AnonymousUser", 'String'>
+    readonly joinedAt: FieldRef<"AnonymousUser", 'DateTime'>
+    readonly updatedAt: FieldRef<"AnonymousUser", 'DateTime'>
+    readonly expiresAt: FieldRef<"AnonymousUser", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AnonymousUser findUnique
+   */
+  export type AnonymousUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser findUniqueOrThrow
+   */
+  export type AnonymousUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser findFirst
+   */
+  export type AnonymousUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnonymousUsers.
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnonymousUsers.
+     */
+    distinct?: AnonymousUserScalarFieldEnum | AnonymousUserScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser findFirstOrThrow
+   */
+  export type AnonymousUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUser to fetch.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AnonymousUsers.
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AnonymousUsers.
+     */
+    distinct?: AnonymousUserScalarFieldEnum | AnonymousUserScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser findMany
+   */
+  export type AnonymousUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * Filter, which AnonymousUsers to fetch.
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AnonymousUsers to fetch.
+     */
+    orderBy?: AnonymousUserOrderByWithRelationInput | AnonymousUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AnonymousUsers.
+     */
+    cursor?: AnonymousUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AnonymousUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AnonymousUsers.
+     */
+    skip?: number
+    distinct?: AnonymousUserScalarFieldEnum | AnonymousUserScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser create
+   */
+  export type AnonymousUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AnonymousUser.
+     */
+    data: XOR<AnonymousUserCreateInput, AnonymousUserUncheckedCreateInput>
+  }
+
+  /**
+   * AnonymousUser createMany
+   */
+  export type AnonymousUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AnonymousUsers.
+     */
+    data: AnonymousUserCreateManyInput | AnonymousUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnonymousUser createManyAndReturn
+   */
+  export type AnonymousUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The data used to create many AnonymousUsers.
+     */
+    data: AnonymousUserCreateManyInput | AnonymousUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AnonymousUser update
+   */
+  export type AnonymousUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AnonymousUser.
+     */
+    data: XOR<AnonymousUserUpdateInput, AnonymousUserUncheckedUpdateInput>
+    /**
+     * Choose, which AnonymousUser to update.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser updateMany
+   */
+  export type AnonymousUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AnonymousUsers.
+     */
+    data: XOR<AnonymousUserUpdateManyMutationInput, AnonymousUserUncheckedUpdateManyInput>
+    /**
+     * Filter which AnonymousUsers to update
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * Limit how many AnonymousUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnonymousUser updateManyAndReturn
+   */
+  export type AnonymousUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * The data used to update AnonymousUsers.
+     */
+    data: XOR<AnonymousUserUpdateManyMutationInput, AnonymousUserUncheckedUpdateManyInput>
+    /**
+     * Filter which AnonymousUsers to update
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * Limit how many AnonymousUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnonymousUser upsert
+   */
+  export type AnonymousUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AnonymousUser to update in case it exists.
+     */
+    where: AnonymousUserWhereUniqueInput
+    /**
+     * In case the AnonymousUser found by the `where` argument doesn't exist, create a new AnonymousUser with this data.
+     */
+    create: XOR<AnonymousUserCreateInput, AnonymousUserUncheckedCreateInput>
+    /**
+     * In case the AnonymousUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AnonymousUserUpdateInput, AnonymousUserUncheckedUpdateInput>
+  }
+
+  /**
+   * AnonymousUser delete
+   */
+  export type AnonymousUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    /**
+     * Filter which AnonymousUser to delete.
+     */
+    where: AnonymousUserWhereUniqueInput
+  }
+
+  /**
+   * AnonymousUser deleteMany
+   */
+  export type AnonymousUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AnonymousUsers to delete
+     */
+    where?: AnonymousUserWhereInput
+    /**
+     * Limit how many AnonymousUsers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AnonymousUser.projects
+   */
+  export type AnonymousUser$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
+    orderBy?: ProjectOrderByWithRelationInput | ProjectOrderByWithRelationInput[]
+    cursor?: ProjectWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectScalarFieldEnum | ProjectScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser.scripts
+   */
+  export type AnonymousUser$scriptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Script
+     */
+    select?: ScriptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Script
+     */
+    omit?: ScriptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ScriptInclude<ExtArgs> | null
+    where?: ScriptWhereInput
+    orderBy?: ScriptOrderByWithRelationInput | ScriptOrderByWithRelationInput[]
+    cursor?: ScriptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ScriptScalarFieldEnum | ScriptScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser.voices
+   */
+  export type AnonymousUser$voicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Voice
+     */
+    select?: VoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Voice
+     */
+    omit?: VoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VoiceInclude<ExtArgs> | null
+    where?: VoiceWhereInput
+    orderBy?: VoiceOrderByWithRelationInput | VoiceOrderByWithRelationInput[]
+    cursor?: VoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VoiceScalarFieldEnum | VoiceScalarFieldEnum[]
+  }
+
+  /**
+   * AnonymousUser without action
+   */
+  export type AnonymousUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Project
    */
 
@@ -2410,6 +3663,7 @@ export namespace Prisma {
     updatedAt: Date | null
     deletedAt: Date | null
     userId: string | null
+    anonymousUserId: string | null
   }
 
   export type ProjectMaxAggregateOutputType = {
@@ -2421,6 +3675,7 @@ export namespace Prisma {
     updatedAt: Date | null
     deletedAt: Date | null
     userId: string | null
+    anonymousUserId: string | null
   }
 
   export type ProjectCountAggregateOutputType = {
@@ -2432,6 +3687,7 @@ export namespace Prisma {
     updatedAt: number
     deletedAt: number
     userId: number
+    anonymousUserId: number
     _all: number
   }
 
@@ -2445,6 +3701,7 @@ export namespace Prisma {
     updatedAt?: true
     deletedAt?: true
     userId?: true
+    anonymousUserId?: true
   }
 
   export type ProjectMaxAggregateInputType = {
@@ -2456,6 +3713,7 @@ export namespace Prisma {
     updatedAt?: true
     deletedAt?: true
     userId?: true
+    anonymousUserId?: true
   }
 
   export type ProjectCountAggregateInputType = {
@@ -2467,6 +3725,7 @@ export namespace Prisma {
     updatedAt?: true
     deletedAt?: true
     userId?: true
+    anonymousUserId?: true
     _all?: true
   }
 
@@ -2551,6 +3810,7 @@ export namespace Prisma {
     updatedAt: Date
     deletedAt: Date | null
     userId: string
+    anonymousUserId: string | null
     _count: ProjectCountAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
@@ -2579,7 +3839,9 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Project$anonymousUserArgs<ExtArgs>
     scripts?: boolean | Project$scriptsArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
@@ -2593,7 +3855,9 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Project$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2605,7 +3869,9 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Project$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
   export type ProjectSelectScalar = {
@@ -2617,25 +3883,30 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt" | "updatedAt" | "deletedAt" | "userId", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "email" | "password" | "createdAt" | "updatedAt" | "deletedAt" | "userId" | "anonymousUserId", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Project$anonymousUserArgs<ExtArgs>
     scripts?: boolean | Project$scriptsArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProjectIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Project$anonymousUserArgs<ExtArgs>
   }
   export type ProjectIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Project$anonymousUserArgs<ExtArgs>
   }
 
   export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Project"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      anonymousUser: Prisma.$AnonymousUserPayload<ExtArgs> | null
       scripts: Prisma.$ScriptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2647,6 +3918,7 @@ export namespace Prisma {
       updatedAt: Date
       deletedAt: Date | null
       userId: string
+      anonymousUserId: string | null
     }, ExtArgs["result"]["project"]>
     composites: {}
   }
@@ -3042,6 +4314,7 @@ export namespace Prisma {
   export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    anonymousUser<T extends Project$anonymousUserArgs<ExtArgs> = {}>(args?: Subset<T, Project$anonymousUserArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     scripts<T extends Project$scriptsArgs<ExtArgs> = {}>(args?: Subset<T, Project$scriptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScriptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3080,6 +4353,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"Project", 'DateTime'>
     readonly deletedAt: FieldRef<"Project", 'DateTime'>
     readonly userId: FieldRef<"Project", 'String'>
+    readonly anonymousUserId: FieldRef<"Project", 'String'>
   }
     
 
@@ -3476,6 +4750,25 @@ export namespace Prisma {
   }
 
   /**
+   * Project.anonymousUser
+   */
+  export type Project$anonymousUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    where?: AnonymousUserWhereInput
+  }
+
+  /**
    * Project.scripts
    */
   export type Project$scriptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3539,6 +4832,7 @@ export namespace Prisma {
     userId: string | null
     projectId: string | null
     voicesId: string | null
+    anonymousUserId: string | null
   }
 
   export type ScriptMaxAggregateOutputType = {
@@ -3552,6 +4846,7 @@ export namespace Prisma {
     userId: string | null
     projectId: string | null
     voicesId: string | null
+    anonymousUserId: string | null
   }
 
   export type ScriptCountAggregateOutputType = {
@@ -3565,6 +4860,7 @@ export namespace Prisma {
     userId: number
     projectId: number
     voicesId: number
+    anonymousUserId: number
     _all: number
   }
 
@@ -3580,6 +4876,7 @@ export namespace Prisma {
     userId?: true
     projectId?: true
     voicesId?: true
+    anonymousUserId?: true
   }
 
   export type ScriptMaxAggregateInputType = {
@@ -3593,6 +4890,7 @@ export namespace Prisma {
     userId?: true
     projectId?: true
     voicesId?: true
+    anonymousUserId?: true
   }
 
   export type ScriptCountAggregateInputType = {
@@ -3606,6 +4904,7 @@ export namespace Prisma {
     userId?: true
     projectId?: true
     voicesId?: true
+    anonymousUserId?: true
     _all?: true
   }
 
@@ -3692,6 +4991,7 @@ export namespace Prisma {
     userId: string
     projectId: string
     voicesId: string | null
+    anonymousUserId: string | null
     _count: ScriptCountAggregateOutputType | null
     _min: ScriptMinAggregateOutputType | null
     _max: ScriptMaxAggregateOutputType | null
@@ -3722,9 +5022,11 @@ export namespace Prisma {
     userId?: boolean
     projectId?: boolean
     voicesId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     voices?: boolean | Script$voicesArgs<ExtArgs>
+    anonymousUser?: boolean | Script$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["script"]>
 
   export type ScriptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3738,9 +5040,11 @@ export namespace Prisma {
     userId?: boolean
     projectId?: boolean
     voicesId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     voices?: boolean | Script$voicesArgs<ExtArgs>
+    anonymousUser?: boolean | Script$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["script"]>
 
   export type ScriptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3754,9 +5058,11 @@ export namespace Prisma {
     userId?: boolean
     projectId?: boolean
     voicesId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     voices?: boolean | Script$voicesArgs<ExtArgs>
+    anonymousUser?: boolean | Script$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["script"]>
 
   export type ScriptSelectScalar = {
@@ -3770,23 +5076,27 @@ export namespace Prisma {
     userId?: boolean
     projectId?: boolean
     voicesId?: boolean
+    anonymousUserId?: boolean
   }
 
-  export type ScriptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "text" | "metadata" | "createdAt" | "deletedAt" | "userId" | "projectId" | "voicesId", ExtArgs["result"]["script"]>
+  export type ScriptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "type" | "text" | "metadata" | "createdAt" | "deletedAt" | "userId" | "projectId" | "voicesId" | "anonymousUserId", ExtArgs["result"]["script"]>
   export type ScriptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     voices?: boolean | Script$voicesArgs<ExtArgs>
+    anonymousUser?: boolean | Script$anonymousUserArgs<ExtArgs>
   }
   export type ScriptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     voices?: boolean | Script$voicesArgs<ExtArgs>
+    anonymousUser?: boolean | Script$anonymousUserArgs<ExtArgs>
   }
   export type ScriptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     voices?: boolean | Script$voicesArgs<ExtArgs>
+    anonymousUser?: boolean | Script$anonymousUserArgs<ExtArgs>
   }
 
   export type $ScriptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3795,6 +5105,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       project: Prisma.$ProjectPayload<ExtArgs>
       voices: Prisma.$VoicePayload<ExtArgs> | null
+      anonymousUser: Prisma.$AnonymousUserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3807,6 +5118,7 @@ export namespace Prisma {
       userId: string
       projectId: string
       voicesId: string | null
+      anonymousUserId: string | null
     }, ExtArgs["result"]["script"]>
     composites: {}
   }
@@ -4204,6 +5516,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     voices<T extends Script$voicesArgs<ExtArgs> = {}>(args?: Subset<T, Script$voicesArgs<ExtArgs>>): Prisma__VoiceClient<$Result.GetResult<Prisma.$VoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    anonymousUser<T extends Script$anonymousUserArgs<ExtArgs> = {}>(args?: Subset<T, Script$anonymousUserArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4243,6 +5556,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Script", 'String'>
     readonly projectId: FieldRef<"Script", 'String'>
     readonly voicesId: FieldRef<"Script", 'String'>
+    readonly anonymousUserId: FieldRef<"Script", 'String'>
   }
     
 
@@ -4658,6 +5972,25 @@ export namespace Prisma {
   }
 
   /**
+   * Script.anonymousUser
+   */
+  export type Script$anonymousUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    where?: AnonymousUserWhereInput
+  }
+
+  /**
    * Script without action
    */
   export type ScriptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4693,6 +6026,7 @@ export namespace Prisma {
     createdAt: Date | null
     deletedAt: Date | null
     userId: string | null
+    anonymousUserId: string | null
   }
 
   export type VoiceMaxAggregateOutputType = {
@@ -4702,6 +6036,7 @@ export namespace Prisma {
     createdAt: Date | null
     deletedAt: Date | null
     userId: string | null
+    anonymousUserId: string | null
   }
 
   export type VoiceCountAggregateOutputType = {
@@ -4711,6 +6046,7 @@ export namespace Prisma {
     createdAt: number
     deletedAt: number
     userId: number
+    anonymousUserId: number
     _all: number
   }
 
@@ -4722,6 +6058,7 @@ export namespace Prisma {
     createdAt?: true
     deletedAt?: true
     userId?: true
+    anonymousUserId?: true
   }
 
   export type VoiceMaxAggregateInputType = {
@@ -4731,6 +6068,7 @@ export namespace Prisma {
     createdAt?: true
     deletedAt?: true
     userId?: true
+    anonymousUserId?: true
   }
 
   export type VoiceCountAggregateInputType = {
@@ -4740,6 +6078,7 @@ export namespace Prisma {
     createdAt?: true
     deletedAt?: true
     userId?: true
+    anonymousUserId?: true
     _all?: true
   }
 
@@ -4822,6 +6161,7 @@ export namespace Prisma {
     createdAt: Date
     deletedAt: Date | null
     userId: string
+    anonymousUserId: string | null
     _count: VoiceCountAggregateOutputType | null
     _min: VoiceMinAggregateOutputType | null
     _max: VoiceMaxAggregateOutputType | null
@@ -4848,7 +6188,9 @@ export namespace Prisma {
     createdAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Voice$anonymousUserArgs<ExtArgs>
     script?: boolean | Voice$scriptArgs<ExtArgs>
     _count?: boolean | VoiceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["voice"]>
@@ -4860,7 +6202,9 @@ export namespace Prisma {
     createdAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Voice$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["voice"]>
 
   export type VoiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4870,7 +6214,9 @@ export namespace Prisma {
     createdAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Voice$anonymousUserArgs<ExtArgs>
   }, ExtArgs["result"]["voice"]>
 
   export type VoiceSelectScalar = {
@@ -4880,25 +6226,30 @@ export namespace Prisma {
     createdAt?: boolean
     deletedAt?: boolean
     userId?: boolean
+    anonymousUserId?: boolean
   }
 
-  export type VoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "hash" | "metadata" | "createdAt" | "deletedAt" | "userId", ExtArgs["result"]["voice"]>
+  export type VoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "hash" | "metadata" | "createdAt" | "deletedAt" | "userId" | "anonymousUserId", ExtArgs["result"]["voice"]>
   export type VoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Voice$anonymousUserArgs<ExtArgs>
     script?: boolean | Voice$scriptArgs<ExtArgs>
     _count?: boolean | VoiceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type VoiceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Voice$anonymousUserArgs<ExtArgs>
   }
   export type VoiceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    anonymousUser?: boolean | Voice$anonymousUserArgs<ExtArgs>
   }
 
   export type $VoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Voice"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      anonymousUser: Prisma.$AnonymousUserPayload<ExtArgs> | null
       script: Prisma.$ScriptPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -4908,6 +6259,7 @@ export namespace Prisma {
       createdAt: Date
       deletedAt: Date | null
       userId: string
+      anonymousUserId: string | null
     }, ExtArgs["result"]["voice"]>
     composites: {}
   }
@@ -5303,6 +6655,7 @@ export namespace Prisma {
   export interface Prisma__VoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    anonymousUser<T extends Voice$anonymousUserArgs<ExtArgs> = {}>(args?: Subset<T, Voice$anonymousUserArgs<ExtArgs>>): Prisma__AnonymousUserClient<$Result.GetResult<Prisma.$AnonymousUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     script<T extends Voice$scriptArgs<ExtArgs> = {}>(args?: Subset<T, Voice$scriptArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScriptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -5339,6 +6692,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Voice", 'DateTime'>
     readonly deletedAt: FieldRef<"Voice", 'DateTime'>
     readonly userId: FieldRef<"Voice", 'String'>
+    readonly anonymousUserId: FieldRef<"Voice", 'String'>
   }
     
 
@@ -5735,6 +7089,25 @@ export namespace Prisma {
   }
 
   /**
+   * Voice.anonymousUser
+   */
+  export type Voice$anonymousUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AnonymousUser
+     */
+    select?: AnonymousUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AnonymousUser
+     */
+    omit?: AnonymousUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AnonymousUserInclude<ExtArgs> | null
+    where?: AnonymousUserWhereInput
+  }
+
+  /**
    * Voice.script
    */
   export type Voice$scriptArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5803,6 +7176,16 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const AnonymousUserScalarFieldEnum: {
+    id: 'id',
+    joinedAt: 'joinedAt',
+    updatedAt: 'updatedAt',
+    expiresAt: 'expiresAt'
+  };
+
+  export type AnonymousUserScalarFieldEnum = (typeof AnonymousUserScalarFieldEnum)[keyof typeof AnonymousUserScalarFieldEnum]
+
+
   export const ProjectScalarFieldEnum: {
     id: 'id',
     username: 'username',
@@ -5811,7 +7194,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt',
-    userId: 'userId'
+    userId: 'userId',
+    anonymousUserId: 'anonymousUserId'
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -5827,7 +7211,8 @@ export namespace Prisma {
     deletedAt: 'deletedAt',
     userId: 'userId',
     projectId: 'projectId',
-    voicesId: 'voicesId'
+    voicesId: 'voicesId',
+    anonymousUserId: 'anonymousUserId'
   };
 
   export type ScriptScalarFieldEnum = (typeof ScriptScalarFieldEnum)[keyof typeof ScriptScalarFieldEnum]
@@ -5839,7 +7224,8 @@ export namespace Prisma {
     metadata: 'metadata',
     createdAt: 'createdAt',
     deletedAt: 'deletedAt',
-    userId: 'userId'
+    userId: 'userId',
+    anonymousUserId: 'anonymousUserId'
   };
 
   export type VoiceScalarFieldEnum = (typeof VoiceScalarFieldEnum)[keyof typeof VoiceScalarFieldEnum]
@@ -5985,6 +7371,62 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type AnonymousUserWhereInput = {
+    AND?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    OR?: AnonymousUserWhereInput[]
+    NOT?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    id?: StringFilter<"AnonymousUser"> | string
+    joinedAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+    updatedAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"AnonymousUser"> | Date | string | null
+    projects?: ProjectListRelationFilter
+    scripts?: ScriptListRelationFilter
+    voices?: VoiceListRelationFilter
+  }
+
+  export type AnonymousUserOrderByWithRelationInput = {
+    id?: SortOrder
+    joinedAt?: SortOrder
+    updatedAt?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    projects?: ProjectOrderByRelationAggregateInput
+    scripts?: ScriptOrderByRelationAggregateInput
+    voices?: VoiceOrderByRelationAggregateInput
+  }
+
+  export type AnonymousUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    OR?: AnonymousUserWhereInput[]
+    NOT?: AnonymousUserWhereInput | AnonymousUserWhereInput[]
+    joinedAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+    updatedAt?: DateTimeFilter<"AnonymousUser"> | Date | string
+    expiresAt?: DateTimeNullableFilter<"AnonymousUser"> | Date | string | null
+    projects?: ProjectListRelationFilter
+    scripts?: ScriptListRelationFilter
+    voices?: VoiceListRelationFilter
+  }, "id">
+
+  export type AnonymousUserOrderByWithAggregationInput = {
+    id?: SortOrder
+    joinedAt?: SortOrder
+    updatedAt?: SortOrder
+    expiresAt?: SortOrderInput | SortOrder
+    _count?: AnonymousUserCountOrderByAggregateInput
+    _max?: AnonymousUserMaxOrderByAggregateInput
+    _min?: AnonymousUserMinOrderByAggregateInput
+  }
+
+  export type AnonymousUserScalarWhereWithAggregatesInput = {
+    AND?: AnonymousUserScalarWhereWithAggregatesInput | AnonymousUserScalarWhereWithAggregatesInput[]
+    OR?: AnonymousUserScalarWhereWithAggregatesInput[]
+    NOT?: AnonymousUserScalarWhereWithAggregatesInput | AnonymousUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AnonymousUser"> | string
+    joinedAt?: DateTimeWithAggregatesFilter<"AnonymousUser"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"AnonymousUser"> | Date | string
+    expiresAt?: DateTimeNullableWithAggregatesFilter<"AnonymousUser"> | Date | string | null
+  }
+
   export type ProjectWhereInput = {
     AND?: ProjectWhereInput | ProjectWhereInput[]
     OR?: ProjectWhereInput[]
@@ -5997,7 +7439,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     userId?: StringFilter<"Project"> | string
+    anonymousUserId?: StringNullableFilter<"Project"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    anonymousUser?: XOR<AnonymousUserNullableScalarRelationFilter, AnonymousUserWhereInput> | null
     scripts?: ScriptListRelationFilter
   }
 
@@ -6010,7 +7454,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    anonymousUser?: AnonymousUserOrderByWithRelationInput
     scripts?: ScriptOrderByRelationAggregateInput
   }
 
@@ -6026,7 +7472,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     userId?: StringFilter<"Project"> | string
+    anonymousUserId?: StringNullableFilter<"Project"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    anonymousUser?: XOR<AnonymousUserNullableScalarRelationFilter, AnonymousUserWhereInput> | null
     scripts?: ScriptListRelationFilter
   }, "id" | "username" | "email">
 
@@ -6039,6 +7487,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrderInput | SortOrder
     _count?: ProjectCountOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
     _min?: ProjectMinOrderByAggregateInput
@@ -6056,6 +7505,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
     userId?: StringWithAggregatesFilter<"Project"> | string
+    anonymousUserId?: StringNullableWithAggregatesFilter<"Project"> | string | null
   }
 
   export type ScriptWhereInput = {
@@ -6072,9 +7522,11 @@ export namespace Prisma {
     userId?: StringFilter<"Script"> | string
     projectId?: StringFilter<"Script"> | string
     voicesId?: StringNullableFilter<"Script"> | string | null
+    anonymousUserId?: StringNullableFilter<"Script"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     voices?: XOR<VoiceNullableScalarRelationFilter, VoiceWhereInput> | null
+    anonymousUser?: XOR<AnonymousUserNullableScalarRelationFilter, AnonymousUserWhereInput> | null
   }
 
   export type ScriptOrderByWithRelationInput = {
@@ -6088,9 +7540,11 @@ export namespace Prisma {
     userId?: SortOrder
     projectId?: SortOrder
     voicesId?: SortOrderInput | SortOrder
+    anonymousUserId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     project?: ProjectOrderByWithRelationInput
     voices?: VoiceOrderByWithRelationInput
+    anonymousUser?: AnonymousUserOrderByWithRelationInput
   }
 
   export type ScriptWhereUniqueInput = Prisma.AtLeast<{
@@ -6107,9 +7561,11 @@ export namespace Prisma {
     userId?: StringFilter<"Script"> | string
     projectId?: StringFilter<"Script"> | string
     voicesId?: StringNullableFilter<"Script"> | string | null
+    anonymousUserId?: StringNullableFilter<"Script"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     voices?: XOR<VoiceNullableScalarRelationFilter, VoiceWhereInput> | null
+    anonymousUser?: XOR<AnonymousUserNullableScalarRelationFilter, AnonymousUserWhereInput> | null
   }, "id">
 
   export type ScriptOrderByWithAggregationInput = {
@@ -6123,6 +7579,7 @@ export namespace Prisma {
     userId?: SortOrder
     projectId?: SortOrder
     voicesId?: SortOrderInput | SortOrder
+    anonymousUserId?: SortOrderInput | SortOrder
     _count?: ScriptCountOrderByAggregateInput
     _max?: ScriptMaxOrderByAggregateInput
     _min?: ScriptMinOrderByAggregateInput
@@ -6142,6 +7599,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Script"> | string
     projectId?: StringWithAggregatesFilter<"Script"> | string
     voicesId?: StringNullableWithAggregatesFilter<"Script"> | string | null
+    anonymousUserId?: StringNullableWithAggregatesFilter<"Script"> | string | null
   }
 
   export type VoiceWhereInput = {
@@ -6154,7 +7612,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Voice"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Voice"> | Date | string | null
     userId?: StringFilter<"Voice"> | string
+    anonymousUserId?: StringNullableFilter<"Voice"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    anonymousUser?: XOR<AnonymousUserNullableScalarRelationFilter, AnonymousUserWhereInput> | null
     script?: ScriptListRelationFilter
   }
 
@@ -6165,7 +7625,9 @@ export namespace Prisma {
     createdAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
+    anonymousUser?: AnonymousUserOrderByWithRelationInput
     script?: ScriptOrderByRelationAggregateInput
   }
 
@@ -6179,7 +7641,9 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Voice"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Voice"> | Date | string | null
     userId?: StringFilter<"Voice"> | string
+    anonymousUserId?: StringNullableFilter<"Voice"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    anonymousUser?: XOR<AnonymousUserNullableScalarRelationFilter, AnonymousUserWhereInput> | null
     script?: ScriptListRelationFilter
   }, "id">
 
@@ -6190,6 +7654,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrderInput | SortOrder
     _count?: VoiceCountOrderByAggregateInput
     _max?: VoiceMaxOrderByAggregateInput
     _min?: VoiceMinOrderByAggregateInput
@@ -6205,6 +7670,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Voice"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Voice"> | Date | string | null
     userId?: StringWithAggregatesFilter<"Voice"> | string
+    anonymousUserId?: StringNullableWithAggregatesFilter<"Voice"> | string | null
   }
 
   export type UserCreateInput = {
@@ -6282,6 +7748,67 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AnonymousUserCreateInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    projects?: ProjectCreateNestedManyWithoutAnonymousUserInput
+    scripts?: ScriptCreateNestedManyWithoutAnonymousUserInput
+    voices?: VoiceCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserUncheckedCreateInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutAnonymousUserInput
+    scripts?: ScriptUncheckedCreateNestedManyWithoutAnonymousUserInput
+    voices?: VoiceUncheckedCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projects?: ProjectUpdateManyWithoutAnonymousUserNestedInput
+    scripts?: ScriptUpdateManyWithoutAnonymousUserNestedInput
+    voices?: VoiceUpdateManyWithoutAnonymousUserNestedInput
+  }
+
+  export type AnonymousUserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutAnonymousUserNestedInput
+    scripts?: ScriptUncheckedUpdateManyWithoutAnonymousUserNestedInput
+    voices?: VoiceUncheckedUpdateManyWithoutAnonymousUserNestedInput
+  }
+
+  export type AnonymousUserCreateManyInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+  }
+
+  export type AnonymousUserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AnonymousUserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type ProjectCreateInput = {
     id?: string
     username: string
@@ -6291,6 +7818,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutProjectsInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutProjectsInput
     scripts?: ScriptCreateNestedManyWithoutProjectInput
   }
 
@@ -6303,6 +7831,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     userId: string
+    anonymousUserId?: string | null
     scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
   }
 
@@ -6315,6 +7844,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutProjectsNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutProjectsNestedInput
     scripts?: ScriptUpdateManyWithoutProjectNestedInput
   }
 
@@ -6327,6 +7857,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
     scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
   }
 
@@ -6339,6 +7870,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     userId: string
+    anonymousUserId?: string | null
   }
 
   export type ProjectUpdateManyMutationInput = {
@@ -6360,6 +7892,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptCreateInput = {
@@ -6373,6 +7906,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutScriptsInput
     project: ProjectCreateNestedOneWithoutScriptsInput
     voices?: VoiceCreateNestedOneWithoutScriptInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutScriptsInput
   }
 
   export type ScriptUncheckedCreateInput = {
@@ -6386,6 +7920,7 @@ export namespace Prisma {
     userId: string
     projectId: string
     voicesId?: string | null
+    anonymousUserId?: string | null
   }
 
   export type ScriptUpdateInput = {
@@ -6399,6 +7934,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutScriptsNestedInput
     project?: ProjectUpdateOneRequiredWithoutScriptsNestedInput
     voices?: VoiceUpdateOneWithoutScriptNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutScriptsNestedInput
   }
 
   export type ScriptUncheckedUpdateInput = {
@@ -6412,6 +7948,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptCreateManyInput = {
@@ -6425,6 +7962,7 @@ export namespace Prisma {
     userId: string
     projectId: string
     voicesId?: string | null
+    anonymousUserId?: string | null
   }
 
   export type ScriptUpdateManyMutationInput = {
@@ -6448,6 +7986,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VoiceCreateInput = {
@@ -6457,6 +7996,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutVoicesInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutVoicesInput
     script?: ScriptCreateNestedManyWithoutVoicesInput
   }
 
@@ -6467,6 +8007,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deletedAt?: Date | string | null
     userId: string
+    anonymousUserId?: string | null
     script?: ScriptUncheckedCreateNestedManyWithoutVoicesInput
   }
 
@@ -6477,6 +8018,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutVoicesNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutVoicesNestedInput
     script?: ScriptUpdateManyWithoutVoicesNestedInput
   }
 
@@ -6487,6 +8029,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
     script?: ScriptUncheckedUpdateManyWithoutVoicesNestedInput
   }
 
@@ -6497,6 +8040,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deletedAt?: Date | string | null
     userId: string
+    anonymousUserId?: string | null
   }
 
   export type VoiceUpdateManyMutationInput = {
@@ -6514,6 +8058,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6680,42 +8225,25 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type AnonymousUserCountOrderByAggregateInput = {
+    id?: SortOrder
+    joinedAt?: SortOrder
+    updatedAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
-  export type ProjectCountOrderByAggregateInput = {
+  export type AnonymousUserMaxOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    createdAt?: SortOrder
+    joinedAt?: SortOrder
     updatedAt?: SortOrder
-    deletedAt?: SortOrder
-    userId?: SortOrder
+    expiresAt?: SortOrder
   }
 
-  export type ProjectMaxOrderByAggregateInput = {
+  export type AnonymousUserMinOrderByAggregateInput = {
     id?: SortOrder
-    username?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    createdAt?: SortOrder
+    joinedAt?: SortOrder
     updatedAt?: SortOrder
-    deletedAt?: SortOrder
-    userId?: SortOrder
-  }
-
-  export type ProjectMinOrderByAggregateInput = {
-    id?: SortOrder
-    username?: SortOrder
-    email?: SortOrder
-    password?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    deletedAt?: SortOrder
-    userId?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6730,6 +8258,52 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type AnonymousUserNullableScalarRelationFilter = {
+    is?: AnonymousUserWhereInput | null
+    isNot?: AnonymousUserWhereInput | null
+  }
+
+  export type ProjectCountOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    userId?: SortOrder
+    anonymousUserId?: SortOrder
+  }
+
+  export type ProjectMaxOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    userId?: SortOrder
+    anonymousUserId?: SortOrder
+  }
+
+  export type ProjectMinOrderByAggregateInput = {
+    id?: SortOrder
+    username?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+    userId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type ProjectScalarRelationFilter = {
@@ -6753,6 +8327,7 @@ export namespace Prisma {
     userId?: SortOrder
     projectId?: SortOrder
     voicesId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type ScriptMaxOrderByAggregateInput = {
@@ -6766,6 +8341,7 @@ export namespace Prisma {
     userId?: SortOrder
     projectId?: SortOrder
     voicesId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type ScriptMinOrderByAggregateInput = {
@@ -6779,6 +8355,7 @@ export namespace Prisma {
     userId?: SortOrder
     projectId?: SortOrder
     voicesId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type VoiceCountOrderByAggregateInput = {
@@ -6788,6 +8365,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deletedAt?: SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type VoiceMaxOrderByAggregateInput = {
@@ -6797,6 +8375,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deletedAt?: SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type VoiceMinOrderByAggregateInput = {
@@ -6806,6 +8385,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     deletedAt?: SortOrder
     userId?: SortOrder
+    anonymousUserId?: SortOrder
   }
 
   export type ProjectCreateNestedManyWithoutUserInput = {
@@ -6946,10 +8526,146 @@ export namespace Prisma {
     deleteMany?: VoiceScalarWhereInput | VoiceScalarWhereInput[]
   }
 
+  export type ProjectCreateNestedManyWithoutAnonymousUserInput = {
+    create?: XOR<ProjectCreateWithoutAnonymousUserInput, ProjectUncheckedCreateWithoutAnonymousUserInput> | ProjectCreateWithoutAnonymousUserInput[] | ProjectUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutAnonymousUserInput | ProjectCreateOrConnectWithoutAnonymousUserInput[]
+    createMany?: ProjectCreateManyAnonymousUserInputEnvelope
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+  }
+
+  export type ScriptCreateNestedManyWithoutAnonymousUserInput = {
+    create?: XOR<ScriptCreateWithoutAnonymousUserInput, ScriptUncheckedCreateWithoutAnonymousUserInput> | ScriptCreateWithoutAnonymousUserInput[] | ScriptUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ScriptCreateOrConnectWithoutAnonymousUserInput | ScriptCreateOrConnectWithoutAnonymousUserInput[]
+    createMany?: ScriptCreateManyAnonymousUserInputEnvelope
+    connect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+  }
+
+  export type VoiceCreateNestedManyWithoutAnonymousUserInput = {
+    create?: XOR<VoiceCreateWithoutAnonymousUserInput, VoiceUncheckedCreateWithoutAnonymousUserInput> | VoiceCreateWithoutAnonymousUserInput[] | VoiceUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: VoiceCreateOrConnectWithoutAnonymousUserInput | VoiceCreateOrConnectWithoutAnonymousUserInput[]
+    createMany?: VoiceCreateManyAnonymousUserInputEnvelope
+    connect?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+  }
+
+  export type ProjectUncheckedCreateNestedManyWithoutAnonymousUserInput = {
+    create?: XOR<ProjectCreateWithoutAnonymousUserInput, ProjectUncheckedCreateWithoutAnonymousUserInput> | ProjectCreateWithoutAnonymousUserInput[] | ProjectUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutAnonymousUserInput | ProjectCreateOrConnectWithoutAnonymousUserInput[]
+    createMany?: ProjectCreateManyAnonymousUserInputEnvelope
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+  }
+
+  export type ScriptUncheckedCreateNestedManyWithoutAnonymousUserInput = {
+    create?: XOR<ScriptCreateWithoutAnonymousUserInput, ScriptUncheckedCreateWithoutAnonymousUserInput> | ScriptCreateWithoutAnonymousUserInput[] | ScriptUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ScriptCreateOrConnectWithoutAnonymousUserInput | ScriptCreateOrConnectWithoutAnonymousUserInput[]
+    createMany?: ScriptCreateManyAnonymousUserInputEnvelope
+    connect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+  }
+
+  export type VoiceUncheckedCreateNestedManyWithoutAnonymousUserInput = {
+    create?: XOR<VoiceCreateWithoutAnonymousUserInput, VoiceUncheckedCreateWithoutAnonymousUserInput> | VoiceCreateWithoutAnonymousUserInput[] | VoiceUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: VoiceCreateOrConnectWithoutAnonymousUserInput | VoiceCreateOrConnectWithoutAnonymousUserInput[]
+    createMany?: VoiceCreateManyAnonymousUserInputEnvelope
+    connect?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type ProjectUpdateManyWithoutAnonymousUserNestedInput = {
+    create?: XOR<ProjectCreateWithoutAnonymousUserInput, ProjectUncheckedCreateWithoutAnonymousUserInput> | ProjectCreateWithoutAnonymousUserInput[] | ProjectUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutAnonymousUserInput | ProjectCreateOrConnectWithoutAnonymousUserInput[]
+    upsert?: ProjectUpsertWithWhereUniqueWithoutAnonymousUserInput | ProjectUpsertWithWhereUniqueWithoutAnonymousUserInput[]
+    createMany?: ProjectCreateManyAnonymousUserInputEnvelope
+    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    update?: ProjectUpdateWithWhereUniqueWithoutAnonymousUserInput | ProjectUpdateWithWhereUniqueWithoutAnonymousUserInput[]
+    updateMany?: ProjectUpdateManyWithWhereWithoutAnonymousUserInput | ProjectUpdateManyWithWhereWithoutAnonymousUserInput[]
+    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+  }
+
+  export type ScriptUpdateManyWithoutAnonymousUserNestedInput = {
+    create?: XOR<ScriptCreateWithoutAnonymousUserInput, ScriptUncheckedCreateWithoutAnonymousUserInput> | ScriptCreateWithoutAnonymousUserInput[] | ScriptUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ScriptCreateOrConnectWithoutAnonymousUserInput | ScriptCreateOrConnectWithoutAnonymousUserInput[]
+    upsert?: ScriptUpsertWithWhereUniqueWithoutAnonymousUserInput | ScriptUpsertWithWhereUniqueWithoutAnonymousUserInput[]
+    createMany?: ScriptCreateManyAnonymousUserInputEnvelope
+    set?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    disconnect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    delete?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    connect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    update?: ScriptUpdateWithWhereUniqueWithoutAnonymousUserInput | ScriptUpdateWithWhereUniqueWithoutAnonymousUserInput[]
+    updateMany?: ScriptUpdateManyWithWhereWithoutAnonymousUserInput | ScriptUpdateManyWithWhereWithoutAnonymousUserInput[]
+    deleteMany?: ScriptScalarWhereInput | ScriptScalarWhereInput[]
+  }
+
+  export type VoiceUpdateManyWithoutAnonymousUserNestedInput = {
+    create?: XOR<VoiceCreateWithoutAnonymousUserInput, VoiceUncheckedCreateWithoutAnonymousUserInput> | VoiceCreateWithoutAnonymousUserInput[] | VoiceUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: VoiceCreateOrConnectWithoutAnonymousUserInput | VoiceCreateOrConnectWithoutAnonymousUserInput[]
+    upsert?: VoiceUpsertWithWhereUniqueWithoutAnonymousUserInput | VoiceUpsertWithWhereUniqueWithoutAnonymousUserInput[]
+    createMany?: VoiceCreateManyAnonymousUserInputEnvelope
+    set?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    disconnect?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    delete?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    connect?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    update?: VoiceUpdateWithWhereUniqueWithoutAnonymousUserInput | VoiceUpdateWithWhereUniqueWithoutAnonymousUserInput[]
+    updateMany?: VoiceUpdateManyWithWhereWithoutAnonymousUserInput | VoiceUpdateManyWithWhereWithoutAnonymousUserInput[]
+    deleteMany?: VoiceScalarWhereInput | VoiceScalarWhereInput[]
+  }
+
+  export type ProjectUncheckedUpdateManyWithoutAnonymousUserNestedInput = {
+    create?: XOR<ProjectCreateWithoutAnonymousUserInput, ProjectUncheckedCreateWithoutAnonymousUserInput> | ProjectCreateWithoutAnonymousUserInput[] | ProjectUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ProjectCreateOrConnectWithoutAnonymousUserInput | ProjectCreateOrConnectWithoutAnonymousUserInput[]
+    upsert?: ProjectUpsertWithWhereUniqueWithoutAnonymousUserInput | ProjectUpsertWithWhereUniqueWithoutAnonymousUserInput[]
+    createMany?: ProjectCreateManyAnonymousUserInputEnvelope
+    set?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    disconnect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    delete?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    connect?: ProjectWhereUniqueInput | ProjectWhereUniqueInput[]
+    update?: ProjectUpdateWithWhereUniqueWithoutAnonymousUserInput | ProjectUpdateWithWhereUniqueWithoutAnonymousUserInput[]
+    updateMany?: ProjectUpdateManyWithWhereWithoutAnonymousUserInput | ProjectUpdateManyWithWhereWithoutAnonymousUserInput[]
+    deleteMany?: ProjectScalarWhereInput | ProjectScalarWhereInput[]
+  }
+
+  export type ScriptUncheckedUpdateManyWithoutAnonymousUserNestedInput = {
+    create?: XOR<ScriptCreateWithoutAnonymousUserInput, ScriptUncheckedCreateWithoutAnonymousUserInput> | ScriptCreateWithoutAnonymousUserInput[] | ScriptUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: ScriptCreateOrConnectWithoutAnonymousUserInput | ScriptCreateOrConnectWithoutAnonymousUserInput[]
+    upsert?: ScriptUpsertWithWhereUniqueWithoutAnonymousUserInput | ScriptUpsertWithWhereUniqueWithoutAnonymousUserInput[]
+    createMany?: ScriptCreateManyAnonymousUserInputEnvelope
+    set?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    disconnect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    delete?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    connect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
+    update?: ScriptUpdateWithWhereUniqueWithoutAnonymousUserInput | ScriptUpdateWithWhereUniqueWithoutAnonymousUserInput[]
+    updateMany?: ScriptUpdateManyWithWhereWithoutAnonymousUserInput | ScriptUpdateManyWithWhereWithoutAnonymousUserInput[]
+    deleteMany?: ScriptScalarWhereInput | ScriptScalarWhereInput[]
+  }
+
+  export type VoiceUncheckedUpdateManyWithoutAnonymousUserNestedInput = {
+    create?: XOR<VoiceCreateWithoutAnonymousUserInput, VoiceUncheckedCreateWithoutAnonymousUserInput> | VoiceCreateWithoutAnonymousUserInput[] | VoiceUncheckedCreateWithoutAnonymousUserInput[]
+    connectOrCreate?: VoiceCreateOrConnectWithoutAnonymousUserInput | VoiceCreateOrConnectWithoutAnonymousUserInput[]
+    upsert?: VoiceUpsertWithWhereUniqueWithoutAnonymousUserInput | VoiceUpsertWithWhereUniqueWithoutAnonymousUserInput[]
+    createMany?: VoiceCreateManyAnonymousUserInputEnvelope
+    set?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    disconnect?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    delete?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    connect?: VoiceWhereUniqueInput | VoiceWhereUniqueInput[]
+    update?: VoiceUpdateWithWhereUniqueWithoutAnonymousUserInput | VoiceUpdateWithWhereUniqueWithoutAnonymousUserInput[]
+    updateMany?: VoiceUpdateManyWithWhereWithoutAnonymousUserInput | VoiceUpdateManyWithWhereWithoutAnonymousUserInput[]
+    deleteMany?: VoiceScalarWhereInput | VoiceScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutProjectsInput = {
     create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
     connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type AnonymousUserCreateNestedOneWithoutProjectsInput = {
+    create?: XOR<AnonymousUserCreateWithoutProjectsInput, AnonymousUserUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: AnonymousUserCreateOrConnectWithoutProjectsInput
+    connect?: AnonymousUserWhereUniqueInput
   }
 
   export type ScriptCreateNestedManyWithoutProjectInput = {
@@ -6966,16 +8682,22 @@ export namespace Prisma {
     connect?: ScriptWhereUniqueInput | ScriptWhereUniqueInput[]
   }
 
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
-  }
-
   export type UserUpdateOneRequiredWithoutProjectsNestedInput = {
     create?: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
     connectOrCreate?: UserCreateOrConnectWithoutProjectsInput
     upsert?: UserUpsertWithoutProjectsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjectsInput, UserUpdateWithoutProjectsInput>, UserUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type AnonymousUserUpdateOneWithoutProjectsNestedInput = {
+    create?: XOR<AnonymousUserCreateWithoutProjectsInput, AnonymousUserUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: AnonymousUserCreateOrConnectWithoutProjectsInput
+    upsert?: AnonymousUserUpsertWithoutProjectsInput
+    disconnect?: AnonymousUserWhereInput | boolean
+    delete?: AnonymousUserWhereInput | boolean
+    connect?: AnonymousUserWhereUniqueInput
+    update?: XOR<XOR<AnonymousUserUpdateToOneWithWhereWithoutProjectsInput, AnonymousUserUpdateWithoutProjectsInput>, AnonymousUserUncheckedUpdateWithoutProjectsInput>
   }
 
   export type ScriptUpdateManyWithoutProjectNestedInput = {
@@ -7024,6 +8746,12 @@ export namespace Prisma {
     connect?: VoiceWhereUniqueInput
   }
 
+  export type AnonymousUserCreateNestedOneWithoutScriptsInput = {
+    create?: XOR<AnonymousUserCreateWithoutScriptsInput, AnonymousUserUncheckedCreateWithoutScriptsInput>
+    connectOrCreate?: AnonymousUserCreateOrConnectWithoutScriptsInput
+    connect?: AnonymousUserWhereUniqueInput
+  }
+
   export type UserUpdateOneRequiredWithoutScriptsNestedInput = {
     create?: XOR<UserCreateWithoutScriptsInput, UserUncheckedCreateWithoutScriptsInput>
     connectOrCreate?: UserCreateOrConnectWithoutScriptsInput
@@ -7050,10 +8778,26 @@ export namespace Prisma {
     update?: XOR<XOR<VoiceUpdateToOneWithWhereWithoutScriptInput, VoiceUpdateWithoutScriptInput>, VoiceUncheckedUpdateWithoutScriptInput>
   }
 
+  export type AnonymousUserUpdateOneWithoutScriptsNestedInput = {
+    create?: XOR<AnonymousUserCreateWithoutScriptsInput, AnonymousUserUncheckedCreateWithoutScriptsInput>
+    connectOrCreate?: AnonymousUserCreateOrConnectWithoutScriptsInput
+    upsert?: AnonymousUserUpsertWithoutScriptsInput
+    disconnect?: AnonymousUserWhereInput | boolean
+    delete?: AnonymousUserWhereInput | boolean
+    connect?: AnonymousUserWhereUniqueInput
+    update?: XOR<XOR<AnonymousUserUpdateToOneWithWhereWithoutScriptsInput, AnonymousUserUpdateWithoutScriptsInput>, AnonymousUserUncheckedUpdateWithoutScriptsInput>
+  }
+
   export type UserCreateNestedOneWithoutVoicesInput = {
     create?: XOR<UserCreateWithoutVoicesInput, UserUncheckedCreateWithoutVoicesInput>
     connectOrCreate?: UserCreateOrConnectWithoutVoicesInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type AnonymousUserCreateNestedOneWithoutVoicesInput = {
+    create?: XOR<AnonymousUserCreateWithoutVoicesInput, AnonymousUserUncheckedCreateWithoutVoicesInput>
+    connectOrCreate?: AnonymousUserCreateOrConnectWithoutVoicesInput
+    connect?: AnonymousUserWhereUniqueInput
   }
 
   export type ScriptCreateNestedManyWithoutVoicesInput = {
@@ -7076,6 +8820,16 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutVoicesInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVoicesInput, UserUpdateWithoutVoicesInput>, UserUncheckedUpdateWithoutVoicesInput>
+  }
+
+  export type AnonymousUserUpdateOneWithoutVoicesNestedInput = {
+    create?: XOR<AnonymousUserCreateWithoutVoicesInput, AnonymousUserUncheckedCreateWithoutVoicesInput>
+    connectOrCreate?: AnonymousUserCreateOrConnectWithoutVoicesInput
+    upsert?: AnonymousUserUpsertWithoutVoicesInput
+    disconnect?: AnonymousUserWhereInput | boolean
+    delete?: AnonymousUserWhereInput | boolean
+    connect?: AnonymousUserWhereUniqueInput
+    update?: XOR<XOR<AnonymousUserUpdateToOneWithWhereWithoutVoicesInput, AnonymousUserUpdateWithoutVoicesInput>, AnonymousUserUncheckedUpdateWithoutVoicesInput>
   }
 
   export type ScriptUpdateManyWithoutVoicesNestedInput = {
@@ -7248,6 +9002,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutProjectsInput
     scripts?: ScriptCreateNestedManyWithoutProjectInput
   }
 
@@ -7259,6 +9014,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    anonymousUserId?: string | null
     scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
   }
 
@@ -7282,6 +9038,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     project: ProjectCreateNestedOneWithoutScriptsInput
     voices?: VoiceCreateNestedOneWithoutScriptInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutScriptsInput
   }
 
   export type ScriptUncheckedCreateWithoutUserInput = {
@@ -7294,6 +9051,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     projectId: string
     voicesId?: string | null
+    anonymousUserId?: string | null
   }
 
   export type ScriptCreateOrConnectWithoutUserInput = {
@@ -7312,6 +9070,7 @@ export namespace Prisma {
     metadata: string
     createdAt?: Date | string
     deletedAt?: Date | string | null
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutVoicesInput
     script?: ScriptCreateNestedManyWithoutVoicesInput
   }
 
@@ -7321,6 +9080,7 @@ export namespace Prisma {
     metadata: string
     createdAt?: Date | string
     deletedAt?: Date | string | null
+    anonymousUserId?: string | null
     script?: ScriptUncheckedCreateNestedManyWithoutVoicesInput
   }
 
@@ -7362,6 +9122,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Project"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Project"> | Date | string | null
     userId?: StringFilter<"Project"> | string
+    anonymousUserId?: StringNullableFilter<"Project"> | string | null
   }
 
   export type ScriptUpsertWithWhereUniqueWithoutUserInput = {
@@ -7394,6 +9155,7 @@ export namespace Prisma {
     userId?: StringFilter<"Script"> | string
     projectId?: StringFilter<"Script"> | string
     voicesId?: StringNullableFilter<"Script"> | string | null
+    anonymousUserId?: StringNullableFilter<"Script"> | string | null
   }
 
   export type VoiceUpsertWithWhereUniqueWithoutUserInput = {
@@ -7422,6 +9184,155 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Voice"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Voice"> | Date | string | null
     userId?: StringFilter<"Voice"> | string
+    anonymousUserId?: StringNullableFilter<"Voice"> | string | null
+  }
+
+  export type ProjectCreateWithoutAnonymousUserInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutProjectsInput
+    scripts?: ScriptCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutAnonymousUserInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    userId: string
+    scripts?: ScriptUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutAnonymousUserInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutAnonymousUserInput, ProjectUncheckedCreateWithoutAnonymousUserInput>
+  }
+
+  export type ProjectCreateManyAnonymousUserInputEnvelope = {
+    data: ProjectCreateManyAnonymousUserInput | ProjectCreateManyAnonymousUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ScriptCreateWithoutAnonymousUserInput = {
+    id?: string
+    title: string
+    type: string
+    text: string
+    metadata: string
+    createdAt?: Date | string
+    deletedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutScriptsInput
+    project: ProjectCreateNestedOneWithoutScriptsInput
+    voices?: VoiceCreateNestedOneWithoutScriptInput
+  }
+
+  export type ScriptUncheckedCreateWithoutAnonymousUserInput = {
+    id?: string
+    title: string
+    type: string
+    text: string
+    metadata: string
+    createdAt?: Date | string
+    deletedAt?: Date | string | null
+    userId: string
+    projectId: string
+    voicesId?: string | null
+  }
+
+  export type ScriptCreateOrConnectWithoutAnonymousUserInput = {
+    where: ScriptWhereUniqueInput
+    create: XOR<ScriptCreateWithoutAnonymousUserInput, ScriptUncheckedCreateWithoutAnonymousUserInput>
+  }
+
+  export type ScriptCreateManyAnonymousUserInputEnvelope = {
+    data: ScriptCreateManyAnonymousUserInput | ScriptCreateManyAnonymousUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VoiceCreateWithoutAnonymousUserInput = {
+    id?: string
+    hash: string
+    metadata: string
+    createdAt?: Date | string
+    deletedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutVoicesInput
+    script?: ScriptCreateNestedManyWithoutVoicesInput
+  }
+
+  export type VoiceUncheckedCreateWithoutAnonymousUserInput = {
+    id?: string
+    hash: string
+    metadata: string
+    createdAt?: Date | string
+    deletedAt?: Date | string | null
+    userId: string
+    script?: ScriptUncheckedCreateNestedManyWithoutVoicesInput
+  }
+
+  export type VoiceCreateOrConnectWithoutAnonymousUserInput = {
+    where: VoiceWhereUniqueInput
+    create: XOR<VoiceCreateWithoutAnonymousUserInput, VoiceUncheckedCreateWithoutAnonymousUserInput>
+  }
+
+  export type VoiceCreateManyAnonymousUserInputEnvelope = {
+    data: VoiceCreateManyAnonymousUserInput | VoiceCreateManyAnonymousUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProjectUpsertWithWhereUniqueWithoutAnonymousUserInput = {
+    where: ProjectWhereUniqueInput
+    update: XOR<ProjectUpdateWithoutAnonymousUserInput, ProjectUncheckedUpdateWithoutAnonymousUserInput>
+    create: XOR<ProjectCreateWithoutAnonymousUserInput, ProjectUncheckedCreateWithoutAnonymousUserInput>
+  }
+
+  export type ProjectUpdateWithWhereUniqueWithoutAnonymousUserInput = {
+    where: ProjectWhereUniqueInput
+    data: XOR<ProjectUpdateWithoutAnonymousUserInput, ProjectUncheckedUpdateWithoutAnonymousUserInput>
+  }
+
+  export type ProjectUpdateManyWithWhereWithoutAnonymousUserInput = {
+    where: ProjectScalarWhereInput
+    data: XOR<ProjectUpdateManyMutationInput, ProjectUncheckedUpdateManyWithoutAnonymousUserInput>
+  }
+
+  export type ScriptUpsertWithWhereUniqueWithoutAnonymousUserInput = {
+    where: ScriptWhereUniqueInput
+    update: XOR<ScriptUpdateWithoutAnonymousUserInput, ScriptUncheckedUpdateWithoutAnonymousUserInput>
+    create: XOR<ScriptCreateWithoutAnonymousUserInput, ScriptUncheckedCreateWithoutAnonymousUserInput>
+  }
+
+  export type ScriptUpdateWithWhereUniqueWithoutAnonymousUserInput = {
+    where: ScriptWhereUniqueInput
+    data: XOR<ScriptUpdateWithoutAnonymousUserInput, ScriptUncheckedUpdateWithoutAnonymousUserInput>
+  }
+
+  export type ScriptUpdateManyWithWhereWithoutAnonymousUserInput = {
+    where: ScriptScalarWhereInput
+    data: XOR<ScriptUpdateManyMutationInput, ScriptUncheckedUpdateManyWithoutAnonymousUserInput>
+  }
+
+  export type VoiceUpsertWithWhereUniqueWithoutAnonymousUserInput = {
+    where: VoiceWhereUniqueInput
+    update: XOR<VoiceUpdateWithoutAnonymousUserInput, VoiceUncheckedUpdateWithoutAnonymousUserInput>
+    create: XOR<VoiceCreateWithoutAnonymousUserInput, VoiceUncheckedCreateWithoutAnonymousUserInput>
+  }
+
+  export type VoiceUpdateWithWhereUniqueWithoutAnonymousUserInput = {
+    where: VoiceWhereUniqueInput
+    data: XOR<VoiceUpdateWithoutAnonymousUserInput, VoiceUncheckedUpdateWithoutAnonymousUserInput>
+  }
+
+  export type VoiceUpdateManyWithWhereWithoutAnonymousUserInput = {
+    where: VoiceScalarWhereInput
+    data: XOR<VoiceUpdateManyMutationInput, VoiceUncheckedUpdateManyWithoutAnonymousUserInput>
   }
 
   export type UserCreateWithoutProjectsInput = {
@@ -7451,6 +9362,29 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutProjectsInput, UserUncheckedCreateWithoutProjectsInput>
   }
 
+  export type AnonymousUserCreateWithoutProjectsInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    scripts?: ScriptCreateNestedManyWithoutAnonymousUserInput
+    voices?: VoiceCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserUncheckedCreateWithoutProjectsInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    scripts?: ScriptUncheckedCreateNestedManyWithoutAnonymousUserInput
+    voices?: VoiceUncheckedCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserCreateOrConnectWithoutProjectsInput = {
+    where: AnonymousUserWhereUniqueInput
+    create: XOR<AnonymousUserCreateWithoutProjectsInput, AnonymousUserUncheckedCreateWithoutProjectsInput>
+  }
+
   export type ScriptCreateWithoutProjectInput = {
     id?: string
     title: string
@@ -7461,6 +9395,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutScriptsInput
     voices?: VoiceCreateNestedOneWithoutScriptInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutScriptsInput
   }
 
   export type ScriptUncheckedCreateWithoutProjectInput = {
@@ -7473,6 +9408,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     userId: string
     voicesId?: string | null
+    anonymousUserId?: string | null
   }
 
   export type ScriptCreateOrConnectWithoutProjectInput = {
@@ -7516,6 +9452,35 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
     voices?: VoiceUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type AnonymousUserUpsertWithoutProjectsInput = {
+    update: XOR<AnonymousUserUpdateWithoutProjectsInput, AnonymousUserUncheckedUpdateWithoutProjectsInput>
+    create: XOR<AnonymousUserCreateWithoutProjectsInput, AnonymousUserUncheckedCreateWithoutProjectsInput>
+    where?: AnonymousUserWhereInput
+  }
+
+  export type AnonymousUserUpdateToOneWithWhereWithoutProjectsInput = {
+    where?: AnonymousUserWhereInput
+    data: XOR<AnonymousUserUpdateWithoutProjectsInput, AnonymousUserUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type AnonymousUserUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scripts?: ScriptUpdateManyWithoutAnonymousUserNestedInput
+    voices?: VoiceUpdateManyWithoutAnonymousUserNestedInput
+  }
+
+  export type AnonymousUserUncheckedUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    scripts?: ScriptUncheckedUpdateManyWithoutAnonymousUserNestedInput
+    voices?: VoiceUncheckedUpdateManyWithoutAnonymousUserNestedInput
   }
 
   export type ScriptUpsertWithWhereUniqueWithoutProjectInput = {
@@ -7570,6 +9535,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutProjectsInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutProjectsInput
   }
 
   export type ProjectUncheckedCreateWithoutScriptsInput = {
@@ -7581,6 +9547,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     userId: string
+    anonymousUserId?: string | null
   }
 
   export type ProjectCreateOrConnectWithoutScriptsInput = {
@@ -7595,6 +9562,7 @@ export namespace Prisma {
     createdAt?: Date | string
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutVoicesInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutVoicesInput
   }
 
   export type VoiceUncheckedCreateWithoutScriptInput = {
@@ -7604,11 +9572,35 @@ export namespace Prisma {
     createdAt?: Date | string
     deletedAt?: Date | string | null
     userId: string
+    anonymousUserId?: string | null
   }
 
   export type VoiceCreateOrConnectWithoutScriptInput = {
     where: VoiceWhereUniqueInput
     create: XOR<VoiceCreateWithoutScriptInput, VoiceUncheckedCreateWithoutScriptInput>
+  }
+
+  export type AnonymousUserCreateWithoutScriptsInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    projects?: ProjectCreateNestedManyWithoutAnonymousUserInput
+    voices?: VoiceCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserUncheckedCreateWithoutScriptsInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutAnonymousUserInput
+    voices?: VoiceUncheckedCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserCreateOrConnectWithoutScriptsInput = {
+    where: AnonymousUserWhereUniqueInput
+    create: XOR<AnonymousUserCreateWithoutScriptsInput, AnonymousUserUncheckedCreateWithoutScriptsInput>
   }
 
   export type UserUpsertWithoutScriptsInput = {
@@ -7664,6 +9656,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutProjectsNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutProjectsNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutScriptsInput = {
@@ -7675,6 +9668,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VoiceUpsertWithoutScriptInput = {
@@ -7695,6 +9689,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutVoicesNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutVoicesNestedInput
   }
 
   export type VoiceUncheckedUpdateWithoutScriptInput = {
@@ -7704,6 +9699,36 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AnonymousUserUpsertWithoutScriptsInput = {
+    update: XOR<AnonymousUserUpdateWithoutScriptsInput, AnonymousUserUncheckedUpdateWithoutScriptsInput>
+    create: XOR<AnonymousUserCreateWithoutScriptsInput, AnonymousUserUncheckedCreateWithoutScriptsInput>
+    where?: AnonymousUserWhereInput
+  }
+
+  export type AnonymousUserUpdateToOneWithWhereWithoutScriptsInput = {
+    where?: AnonymousUserWhereInput
+    data: XOR<AnonymousUserUpdateWithoutScriptsInput, AnonymousUserUncheckedUpdateWithoutScriptsInput>
+  }
+
+  export type AnonymousUserUpdateWithoutScriptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projects?: ProjectUpdateManyWithoutAnonymousUserNestedInput
+    voices?: VoiceUpdateManyWithoutAnonymousUserNestedInput
+  }
+
+  export type AnonymousUserUncheckedUpdateWithoutScriptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutAnonymousUserNestedInput
+    voices?: VoiceUncheckedUpdateManyWithoutAnonymousUserNestedInput
   }
 
   export type UserCreateWithoutVoicesInput = {
@@ -7733,6 +9758,29 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutVoicesInput, UserUncheckedCreateWithoutVoicesInput>
   }
 
+  export type AnonymousUserCreateWithoutVoicesInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    projects?: ProjectCreateNestedManyWithoutAnonymousUserInput
+    scripts?: ScriptCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserUncheckedCreateWithoutVoicesInput = {
+    id?: string
+    joinedAt?: Date | string
+    updatedAt?: Date | string
+    expiresAt?: Date | string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutAnonymousUserInput
+    scripts?: ScriptUncheckedCreateNestedManyWithoutAnonymousUserInput
+  }
+
+  export type AnonymousUserCreateOrConnectWithoutVoicesInput = {
+    where: AnonymousUserWhereUniqueInput
+    create: XOR<AnonymousUserCreateWithoutVoicesInput, AnonymousUserUncheckedCreateWithoutVoicesInput>
+  }
+
   export type ScriptCreateWithoutVoicesInput = {
     id?: string
     title: string
@@ -7743,6 +9791,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutScriptsInput
     project: ProjectCreateNestedOneWithoutScriptsInput
+    anonymousUser?: AnonymousUserCreateNestedOneWithoutScriptsInput
   }
 
   export type ScriptUncheckedCreateWithoutVoicesInput = {
@@ -7755,6 +9804,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     userId: string
     projectId: string
+    anonymousUserId?: string | null
   }
 
   export type ScriptCreateOrConnectWithoutVoicesInput = {
@@ -7800,6 +9850,35 @@ export namespace Prisma {
     scripts?: ScriptUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type AnonymousUserUpsertWithoutVoicesInput = {
+    update: XOR<AnonymousUserUpdateWithoutVoicesInput, AnonymousUserUncheckedUpdateWithoutVoicesInput>
+    create: XOR<AnonymousUserCreateWithoutVoicesInput, AnonymousUserUncheckedCreateWithoutVoicesInput>
+    where?: AnonymousUserWhereInput
+  }
+
+  export type AnonymousUserUpdateToOneWithWhereWithoutVoicesInput = {
+    where?: AnonymousUserWhereInput
+    data: XOR<AnonymousUserUpdateWithoutVoicesInput, AnonymousUserUncheckedUpdateWithoutVoicesInput>
+  }
+
+  export type AnonymousUserUpdateWithoutVoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projects?: ProjectUpdateManyWithoutAnonymousUserNestedInput
+    scripts?: ScriptUpdateManyWithoutAnonymousUserNestedInput
+  }
+
+  export type AnonymousUserUncheckedUpdateWithoutVoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    joinedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutAnonymousUserNestedInput
+    scripts?: ScriptUncheckedUpdateManyWithoutAnonymousUserNestedInput
+  }
+
   export type ScriptUpsertWithWhereUniqueWithoutVoicesInput = {
     where: ScriptWhereUniqueInput
     update: XOR<ScriptUpdateWithoutVoicesInput, ScriptUncheckedUpdateWithoutVoicesInput>
@@ -7824,6 +9903,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    anonymousUserId?: string | null
   }
 
   export type ScriptCreateManyUserInput = {
@@ -7836,6 +9916,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     projectId: string
     voicesId?: string | null
+    anonymousUserId?: string | null
   }
 
   export type VoiceCreateManyUserInput = {
@@ -7844,6 +9925,7 @@ export namespace Prisma {
     metadata: string
     createdAt?: Date | string
     deletedAt?: Date | string | null
+    anonymousUserId?: string | null
   }
 
   export type ProjectUpdateWithoutUserInput = {
@@ -7854,6 +9936,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    anonymousUser?: AnonymousUserUpdateOneWithoutProjectsNestedInput
     scripts?: ScriptUpdateManyWithoutProjectNestedInput
   }
 
@@ -7865,6 +9948,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
     scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
   }
 
@@ -7876,6 +9960,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptUpdateWithoutUserInput = {
@@ -7888,6 +9973,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     project?: ProjectUpdateOneRequiredWithoutScriptsNestedInput
     voices?: VoiceUpdateOneWithoutScriptNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutScriptsNestedInput
   }
 
   export type ScriptUncheckedUpdateWithoutUserInput = {
@@ -7900,6 +9986,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     projectId?: StringFieldUpdateOperationsInput | string
     voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptUncheckedUpdateManyWithoutUserInput = {
@@ -7912,6 +9999,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     projectId?: StringFieldUpdateOperationsInput | string
     voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VoiceUpdateWithoutUserInput = {
@@ -7920,6 +10008,7 @@ export namespace Prisma {
     metadata?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    anonymousUser?: AnonymousUserUpdateOneWithoutVoicesNestedInput
     script?: ScriptUpdateManyWithoutVoicesNestedInput
   }
 
@@ -7929,6 +10018,7 @@ export namespace Prisma {
     metadata?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
     script?: ScriptUncheckedUpdateManyWithoutVoicesNestedInput
   }
 
@@ -7938,6 +10028,143 @@ export namespace Prisma {
     metadata?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ProjectCreateManyAnonymousUserInput = {
+    id?: string
+    username: string
+    email: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    userId: string
+  }
+
+  export type ScriptCreateManyAnonymousUserInput = {
+    id?: string
+    title: string
+    type: string
+    text: string
+    metadata: string
+    createdAt?: Date | string
+    deletedAt?: Date | string | null
+    userId: string
+    projectId: string
+    voicesId?: string | null
+  }
+
+  export type VoiceCreateManyAnonymousUserInput = {
+    id?: string
+    hash: string
+    metadata: string
+    createdAt?: Date | string
+    deletedAt?: Date | string | null
+    userId: string
+  }
+
+  export type ProjectUpdateWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutProjectsNestedInput
+    scripts?: ScriptUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    scripts?: ScriptUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateManyWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    username?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ScriptUpdateWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    metadata?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutScriptsNestedInput
+    project?: ProjectUpdateOneRequiredWithoutScriptsNestedInput
+    voices?: VoiceUpdateOneWithoutScriptNestedInput
+  }
+
+  export type ScriptUncheckedUpdateWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    metadata?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ScriptUncheckedUpdateManyWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    metadata?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type VoiceUpdateWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    metadata?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutVoicesNestedInput
+    script?: ScriptUpdateManyWithoutVoicesNestedInput
+  }
+
+  export type VoiceUncheckedUpdateWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    metadata?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+    script?: ScriptUncheckedUpdateManyWithoutVoicesNestedInput
+  }
+
+  export type VoiceUncheckedUpdateManyWithoutAnonymousUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
+    metadata?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ScriptCreateManyProjectInput = {
@@ -7950,6 +10177,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     userId: string
     voicesId?: string | null
+    anonymousUserId?: string | null
   }
 
   export type ScriptUpdateWithoutProjectInput = {
@@ -7962,6 +10190,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutScriptsNestedInput
     voices?: VoiceUpdateOneWithoutScriptNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutScriptsNestedInput
   }
 
   export type ScriptUncheckedUpdateWithoutProjectInput = {
@@ -7974,6 +10203,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
     voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptUncheckedUpdateManyWithoutProjectInput = {
@@ -7986,6 +10216,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
     voicesId?: NullableStringFieldUpdateOperationsInput | string | null
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptCreateManyVoicesInput = {
@@ -7998,6 +10229,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     userId: string
     projectId: string
+    anonymousUserId?: string | null
   }
 
   export type ScriptUpdateWithoutVoicesInput = {
@@ -8010,6 +10242,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutScriptsNestedInput
     project?: ProjectUpdateOneRequiredWithoutScriptsNestedInput
+    anonymousUser?: AnonymousUserUpdateOneWithoutScriptsNestedInput
   }
 
   export type ScriptUncheckedUpdateWithoutVoicesInput = {
@@ -8022,6 +10255,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ScriptUncheckedUpdateManyWithoutVoicesInput = {
@@ -8034,6 +10268,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    anonymousUserId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

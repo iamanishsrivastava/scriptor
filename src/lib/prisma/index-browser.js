@@ -129,6 +129,13 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AnonymousUserScalarFieldEnum = {
+  id: 'id',
+  joinedAt: 'joinedAt',
+  updatedAt: 'updatedAt',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
   username: 'username',
@@ -137,7 +144,8 @@ exports.Prisma.ProjectScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt',
-  userId: 'userId'
+  userId: 'userId',
+  anonymousUserId: 'anonymousUserId'
 };
 
 exports.Prisma.ScriptScalarFieldEnum = {
@@ -150,7 +158,8 @@ exports.Prisma.ScriptScalarFieldEnum = {
   deletedAt: 'deletedAt',
   userId: 'userId',
   projectId: 'projectId',
-  voicesId: 'voicesId'
+  voicesId: 'voicesId',
+  anonymousUserId: 'anonymousUserId'
 };
 
 exports.Prisma.VoiceScalarFieldEnum = {
@@ -159,7 +168,8 @@ exports.Prisma.VoiceScalarFieldEnum = {
   metadata: 'metadata',
   createdAt: 'createdAt',
   deletedAt: 'deletedAt',
-  userId: 'userId'
+  userId: 'userId',
+  anonymousUserId: 'anonymousUserId'
 };
 
 exports.Prisma.SortOrder = {
@@ -180,6 +190,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  AnonymousUser: 'AnonymousUser',
   Project: 'Project',
   Script: 'Script',
   Voice: 'Voice'

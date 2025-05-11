@@ -1,25 +1,30 @@
-name: Sync Milestone Due Dates to Project Field
+name: Sync Milestone Due Date to Project Field
 
 on:
-  issues:
-    types: [opened, edited, milestoned]
-  schedule:
-    - cron: '0 * * * *'  # optional: run hourly to ensure sync
+  workflow_dispatch:
 
 jobs:
-  sync-due-date:
+  sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Sync Milestone Due Date to Project Field
+      - name: Sync Milestone Due Date
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const issue = context.payload.issue;
+            const issueNumber = 1; // 👈 Change this to test with a real issue
+            const PROJECT_ID = "YOUR_PROJECT_ID"; // 👈 Replace this
+            const FIELD_ID = "YOUR_DATE_FIELD_ID"; // 👈 Replace this
+
+            const { data: issue } = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+            });
 
             if (!issue.milestone) {
-              console.log("No milestone assigned.");
+              console.log("No milestone.");
               return;
             }
 
@@ -31,19 +36,14 @@ jobs:
 
             const dueDate = milestone.data.due_on;
             if (!dueDate) {
-              console.log("Milestone has no due date.");
+              console.log("No due date on milestone.");
               return;
             }
 
-            // Your project number and field ID (replace with actual IDs)
-            const PROJECT_ID = 'PUT_PROJECT_ID_HERE';
-            const FIELD_ID = 'PUT_FIELD_ID_HERE';
-
-            // Find project item ID by issue ID
-            const { data: projects } = await github.graphql(`
-              query($id: ID!) {
-                repository(owner: "${context.repo.owner}", name: "${context.repo.repo}") {
-                  issue(number: ${issue.number}) {
+            const query = `
+              query ($owner: String!, $repo: String!, $issueNumber: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  issue(number: $issueNumber) {
                     projectItems(first: 10) {
                       nodes {
                         id
@@ -55,28 +55,43 @@ jobs:
                   }
                 }
               }
-            `);
+            `;
 
-            const projectItem = projects.repository.issue.projectItems.nodes.find(item => item.project.id === PROJECT_ID);
-            if (!projectItem) {
-              console.log("Issue not found in specified project.");
+            const variables = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issueNumber,
+            };
+
+            const result = await github.graphql(query, variables);
+            const items = result.repository.issue.projectItems.nodes;
+            const item = items.find(item => item.project.id === PROJECT_ID);
+
+            if (!item) {
+              console.log("Issue not in project.");
               return;
             }
 
-            // Update the custom date field
-            await github.graphql(`
-              mutation {
+            const mutation = `
+              mutation ($projectId: ID!, $itemId: ID!, $fieldId: ID!, $date: Date!) {
                 updateProjectV2ItemFieldValue(input: {
-                  projectId: "${PROJECT_ID}",
-                  itemId: "${projectItem.id}",
-                  fieldId: "${FIELD_ID}",
-                  value: {
-                    date: "${dueDate}"
-                  }
+                  projectId: $projectId,
+                  itemId: $itemId,
+                  fieldId: $fieldId,
+                  value: { date: $date }
                 }) {
                   projectV2Item {
                     id
                   }
                 }
               }
-            `);
+            `;
+
+            await github.graphql(mutation, {
+              projectId: PROJECT_ID,
+              itemId: item.id,
+              fieldId: FIELD_ID,
+              date: dueDate,
+            });
+
+            console.log("Updated project field with due date.");

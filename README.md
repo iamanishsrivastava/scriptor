@@ -81,7 +81,7 @@ cp .env.example .env
 
 ### 4. Set up the database
 
-- Create a PostgreSQL database and update the `DATABASE_URL` in your `.env` file.
+- Create a PostgreSQL database and update the `DATABASE_URL` in your `.env` file. For ref. [PR7](https://github.com/TezBytes/scriptor/pull/7#issue-3054477033)
 - Run the following command to create the database and apply migrations:
 
 ```bash
